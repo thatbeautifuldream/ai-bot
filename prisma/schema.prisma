@@ -1,0 +1,21 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  USER
+  SYSTEM
+}
+
+model Conversation {
+  id        Int      @id @default(autoincrement())
+  question  String
+  answer    String
+  role      Role     @default(SYSTEM)
+  createdAt DateTime @default(now())
+}
